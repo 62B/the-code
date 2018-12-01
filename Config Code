@@ -1,0 +1,9 @@
+vex::brain Brain;
+vex::motor LeftMotor = vex::motor(vex::PORT11);
+vex::motor LeftMotor2 = vex::motor(vex::PORT10);
+vex::motor RightMotor = vex::motor(vex::PORT2, true);
+vex::motor RightMotor2 = vex::motor(vex::PORT1, true);
+vex::motor Propeller = vex::motor(vex::PORT18);
+vex::motor Catapult = vex::motor(vex::PORT16, true);
+vex::controller Controller1 = vex::controller();
+vex::competition Competition = vex::competition();

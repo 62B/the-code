@@ -1,0 +1,216 @@
+#include "robot-config.h"
+
+void driveforward ( )
+{
+    RightMotor.spin(vex::directionType::fwd,120,vex::velocityUnits::rpm);
+    RightMotor2.spin(vex::directionType::fwd,120,vex::velocityUnits::rpm);
+    LeftMotor.spin(vex::directionType::fwd,120,vex::velocityUnits::rpm);
+    LeftMotor2.spin(vex::directionType::fwd,120,vex::velocityUnits::rpm);
+}
+
+void driveforwardwithpropeller ( )
+{
+    RightMotor.spin(vex::directionType::fwd,120,vex::velocityUnits::rpm);
+    RightMotor2.spin(vex::directionType::fwd,120,vex::velocityUnits::rpm);
+    LeftMotor.spin(vex::directionType::fwd,120,vex::velocityUnits::rpm);
+    LeftMotor2.spin(vex::directionType::fwd,120,vex::velocityUnits::rpm);
+    Propeller.spin(vex::directionType::rev,240,vex::velocityUnits::rpm);
+}
+
+void drivebackwards (  )
+{
+    LeftMotor.spin(vex::directionType::rev,120,vex::velocityUnits::rpm);
+    LeftMotor2.spin(vex::directionType::rev,120,vex::velocityUnits::rpm);
+    RightMotor.spin(vex::directionType::rev,120,vex::velocityUnits::rpm);
+    RightMotor2.spin(vex::directionType::rev,120,vex::velocityUnits::rpm);
+}
+
+void brake ( )
+{
+    LeftMotor.stop(vex::brakeType::brake);
+    LeftMotor2.stop(vex::brakeType::brake);
+    RightMotor.stop(vex::brakeType::brake);
+    RightMotor2.stop(vex::brakeType::brake);
+    vex::task::sleep(500);
+}
+
+void turnright ( )
+{
+    RightMotor.spin(vex::directionType::rev,120,vex::velocityUnits::rpm);
+    RightMotor2.spin(vex::directionType::rev,120,vex::velocityUnits::rpm);
+    LeftMotor.spin(vex::directionType::fwd,120,vex::velocityUnits::rpm);
+    LeftMotor2.spin(vex::directionType::fwd,120,vex::velocityUnits::rpm);
+    vex::task::sleep(460);
+}
+
+void turnleft ( )
+{
+    RightMotor.spin(vex::directionType::fwd,120,vex::velocityUnits::rpm);
+    RightMotor2.spin(vex::directionType::fwd,120,vex::velocityUnits::rpm);
+    LeftMotor.spin(vex::directionType::rev,120,vex::velocityUnits::rpm);
+    LeftMotor2.spin(vex::directionType::rev, 120,vex::velocityUnits::rpm);
+    vex::task::sleep(460);
+}
+
+void customleft (int time)
+{
+    RightMotor.spin(vex::directionType::fwd,120,vex::velocityUnits::rpm);
+    RightMotor2.spin(vex::directionType::fwd,120,vex::velocityUnits::rpm);
+    LeftMotor.spin(vex::directionType::rev,120,vex::velocityUnits::rpm);
+    LeftMotor2.spin(vex::directionType::rev, 120,vex::velocityUnits::rpm);
+    vex::task::sleep(time);
+}
+
+void customright (int time)
+{
+    RightMotor.spin(vex::directionType::rev,120,vex::velocityUnits::rpm);
+    RightMotor2.spin(vex::directionType::rev,120,vex::velocityUnits::rpm);
+    LeftMotor.spin(vex::directionType::fwd,120,vex::velocityUnits::rpm);
+    LeftMotor2.spin(vex::directionType::fwd, 120,vex::velocityUnits::rpm);
+    vex::task::sleep(time);
+}
+
+
+
+
+//                              Autonomous Task                              
+
+void autonomous( void )
+{
+    //23.416666 inches is length and width of one square
+    //33.1161675 is diagonal of one square
+    //750 milliseconds is one square length
+    //1060 milliseconds is one square diagonal
+    //circumference of wheel is 5pi inches
+    //500 miliseconds is a 90 degree turn with Right and left opposite direction at 120 revs
+
+    Brain.Screen.print("starting");
+
+    //SKILLS
+    drivebackwards();
+    vex::task::sleep(2000);
+    brake();
+    driveforward();
+    vex::task::sleep(1000);
+    brake();
+    customright(490);
+    brake();
+    driveforward();
+    Propeller.spin(vex::directionType::rev,180,vex::velocityUnits::rpm);
+    vex::task::sleep(1600);
+    brake();
+    Propeller.stop(vex::brakeType::brake);
+    turnleft();
+    drivebackwards();
+    vex::task::sleep(1100);
+    brake();
+    driveforward();
+    vex::task::sleep(1300);
+    brake();
+    turnright();
+    driveforward();
+    Propeller.spin(vex::directionType::rev,180,vex::velocityUnits::rpm);
+    vex::task::sleep(1900);
+    brake();
+    Propeller.stop(vex::brakeType::brake);
+    turnleft();
+    drivebackwards();
+    vex::task::sleep(1200);
+    brake();
+    driveforward();
+    vex::task::sleep(1400);
+    brake();
+    drivebackwards();
+    vex::task::sleep(200);
+    brake();
+    turnright();
+    driveforward();
+    vex::task::sleep(600);
+    brake();
+    turnleft();
+    driveforward();
+    vex::task::sleep(1775);
+    brake();
+    turnleft();
+    driveforward();
+    Propeller.spin(vex::directionType::fwd,240,vex::velocityUnits::rpm);
+    vex::task::sleep(2800);
+    brake();
+    Propeller.stop(vex::brakeType::brake);
+    
+}
+void usercontrol( void ) 
+{
+    Brain.Screen.print("Tank Control Program Started");
+   
+
+    while(1) 
+    {
+         if (Controller1.Axis3.value()< 2 && Controller1.Axis3.value()>-2)
+        {
+            LeftMotor.stop(vex::brakeType::brake);
+            LeftMotor2.stop(vex::brakeType::brake);
+        }
+        else
+        {
+        LeftMotor.spin(vex::directionType::fwd, (Controller1.Axis3.value())/2, vex::velocityUnits::pct);
+        LeftMotor2.spin(vex::directionType::fwd, (Controller1.Axis3.value())/2, vex::velocityUnits::pct);
+        }
+        if (Controller1.Axis2.value()< 2 && Controller1.Axis2.value()>-2)
+        {
+            RightMotor.stop(vex::brakeType::brake);
+            RightMotor2.stop(vex::brakeType::brake);
+        }
+        else
+        {
+        RightMotor.spin(vex::directionType::fwd, (Controller1.Axis2.value())/2, vex::velocityUnits::pct);
+        RightMotor2.spin(vex::directionType::fwd, (Controller1.Axis2.value())/2, vex::velocityUnits::pct);
+
+        }
+       
+        //Propeller
+        if (Controller1.ButtonR2.pressing())
+        {
+            Propeller.spin(vex::directionType::fwd, -240, vex::velocityUnits::pct);
+        }
+        else if (Controller1.ButtonR1.pressing())
+        {
+        Propeller.spin(vex::directionType::fwd, 240, vex::velocityUnits::pct);
+        }
+        else
+        {
+            Propeller.stop(vex::brakeType::brake);
+        }
+         //Catapult/
+        
+        if (Controller1.ButtonA.pressing())
+        {
+        Catapult.spin(vex::directionType::fwd, -60, vex::velocityUnits::pct);
+        }
+        else
+        { 
+            Catapult.stop(vex::brakeType::brake);
+        }
+                             vex::task::sleep(20); //Sleep the task for a short amount of time to prevent wasted resources.
+    }
+    
+}
+    
+// Main will set up the competition functions and callbacks.
+
+int main()
+{
+    autonomous(  );
+  Competition.drivercontrol( usercontrol );
+    
+
+ //Prevent main from exiting with an infinite loop.                        
+    
+    //Create an infinite loop so that the program can pull remote control values every iteration.
+    //This loop causes the program to run forever.
+    while(1)
+    {
+       
+                             vex::task::sleep(20); //Sleep the task for a short amount of time to prevent wasted resources.
+    }
+}

@@ -1,5 +1,15 @@
 #include "robot-config.h"
 
+void brake ()
+{
+    LeftMotor.stop(vex::brakeType::brake);
+    LeftMotor2.stop(vex::brakeType::brake);
+    RightMotor.stop(vex::brakeType::brake);
+    RightMotor2.stop(vex::brakeType::brake);
+    Propeller.stop(vex::brakeType::brake);
+    vex::task::sleep(500);
+}
+
 void driveforward ( )
 {
     RightMotor.spin(vex::directionType::fwd,120,vex::velocityUnits::rpm);
@@ -8,16 +18,47 @@ void driveforward ( )
     LeftMotor2.spin(vex::directionType::fwd,120,vex::velocityUnits::rpm);
 }
 
-void driveforwardwithpropeller ( )
+void fdrive (int num)
 {
-    RightMotor.spin(vex::directionType::fwd,120,vex::velocityUnits::rpm);
-    RightMotor2.spin(vex::directionType::fwd,120,vex::velocityUnits::rpm);
-    LeftMotor.spin(vex::directionType::fwd,120,vex::velocityUnits::rpm);
-    LeftMotor2.spin(vex::directionType::fwd,120,vex::velocityUnits::rpm);
-    Propeller.spin(vex::directionType::rev,240,vex::velocityUnits::rpm);
+    LeftMotor.resetRotation();
+    LeftMotor2.resetRotation();
+    RightMotor.resetRotation();
+    RightMotor2.resetRotation();
+    RightMotor.startRotateTo(num,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    LeftMotor.startRotateTo(num,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    RightMotor2.startRotateTo(num,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    LeftMotor2.rotateTo(num,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
 }
 
-void drivebackwards (  )
+void fdriveflip (int num)
+{
+    LeftMotor.resetRotation();
+    LeftMotor2.resetRotation();
+    RightMotor.resetRotation();
+    RightMotor2.resetRotation();
+    Propeller.resetRotation();
+    RightMotor.startRotateTo(num,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    LeftMotor.startRotateTo(num,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    RightMotor2.startRotateTo(num,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    LeftMotor2.startRotateTo(num,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    Propeller.rotateTo(-(num*1.5),vex::rotationUnits::deg,180,vex::velocityUnits::rpm);
+}
+
+void fdriveplat (int num)
+{
+    LeftMotor.resetRotation();
+    LeftMotor2.resetRotation();
+    RightMotor.resetRotation();
+    RightMotor2.resetRotation();
+    Propeller.resetRotation();
+    RightMotor.startRotateTo(num,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    LeftMotor.startRotateTo(num,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    RightMotor2.startRotateTo(num,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    LeftMotor2.startRotateTo(num,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    Propeller.rotateTo((num*2),vex::rotationUnits::deg,240,vex::velocityUnits::rpm);
+}
+
+void drivebackwards ()
 {
     LeftMotor.spin(vex::directionType::rev,120,vex::velocityUnits::rpm);
     LeftMotor2.spin(vex::directionType::rev,120,vex::velocityUnits::rpm);
@@ -25,14 +66,44 @@ void drivebackwards (  )
     RightMotor2.spin(vex::directionType::rev,120,vex::velocityUnits::rpm);
 }
 
-void brake ( )
-{
-    LeftMotor.stop(vex::brakeType::brake);
-    LeftMotor2.stop(vex::brakeType::brake);
-    RightMotor.stop(vex::brakeType::brake);
-    RightMotor2.stop(vex::brakeType::brake);
-    vex::task::sleep(500);
+void bdrive (int num)
+{               
+    LeftMotor.resetRotation();
+    LeftMotor2.resetRotation();
+    RightMotor.resetRotation();
+    RightMotor2.resetRotation();
+    RightMotor.startRotateTo((num*-1),vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    LeftMotor.startRotateTo((num*-1),vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    RightMotor2.startRotateTo((num*-1),vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    LeftMotor2.rotateTo((num*-1),vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
 }
+
+void rturn ()
+{
+    LeftMotor.resetRotation();
+    LeftMotor2.resetRotation();
+    RightMotor.resetRotation();
+    RightMotor2.resetRotation();
+    LeftMotor.startRotateTo(337,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    LeftMotor2.startRotateTo(337,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    RightMotor.startRotateTo(-337,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    RightMotor2.rotateTo(-337,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    brake();
+}
+
+void lturn ()
+{
+    LeftMotor.resetRotation();
+    LeftMotor2.resetRotation();
+    RightMotor.resetRotation();
+    RightMotor2.resetRotation();
+    RightMotor.startRotateTo(337,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    RightMotor2.startRotateTo(337,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    LeftMotor.startRotateTo(-337,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    LeftMotor2.startRotateTo(-337,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    brake();
+}
+
 
 void turnright ( )
 {
@@ -41,6 +112,7 @@ void turnright ( )
     LeftMotor.spin(vex::directionType::fwd,120,vex::velocityUnits::rpm);
     LeftMotor2.spin(vex::directionType::fwd,120,vex::velocityUnits::rpm);
     vex::task::sleep(490);
+    brake();
 }
 
 void turnleft ( )
@@ -50,6 +122,7 @@ void turnleft ( )
     LeftMotor.spin(vex::directionType::rev,120,vex::velocityUnits::rpm);
     LeftMotor2.spin(vex::directionType::rev, 120,vex::velocityUnits::rpm);
     vex::task::sleep(490);
+    brake();
 }
 
 void customleft (int time)
@@ -59,6 +132,7 @@ void customleft (int time)
     LeftMotor.spin(vex::directionType::rev,120,vex::velocityUnits::rpm);
     LeftMotor2.spin(vex::directionType::rev, 120,vex::velocityUnits::rpm);
     vex::task::sleep(time);
+    brake();
 }
 
 void customright (int time)
@@ -68,9 +142,16 @@ void customright (int time)
     LeftMotor.spin(vex::directionType::fwd,120,vex::velocityUnits::rpm);
     LeftMotor2.spin(vex::directionType::fwd, 120,vex::velocityUnits::rpm);
     vex::task::sleep(time);
+    brake();
 }
 
-
+void setDriveHold()
+{
+    RightMotor.setStopping(vex::brakeType::hold);
+    RightMotor2.setStopping(vex::brakeType::hold);
+    LeftMotor.setStopping(vex::brakeType::hold);
+    LeftMotor2.setStopping(vex::brakeType::hold);
+}
 
 
 //                              Autonomous Task                              
@@ -87,101 +168,57 @@ void autonomous( void )
     Brain.Screen.print("starting");
     
     //AUTONOMOUS Blue Right Flag
-    /**
-    drivebackwards();
-    vex::task::sleep(2000);
+   
+    bdrive(1380);
     brake();
-    driveforward();
-    vex::task::sleep(1000);
+    fdrive(690);
     brake();
-    customright(490);
+    rturn();
+    fdriveflip(915);
     brake();
-    driveforward();
-    Propeller.spin(vex::directionType::rev,240,vex::velocityUnits::rpm);
-    vex::task::sleep(1325);
+    lturn();
+    fdriveplat(1517);
     brake();
-    Propeller.stop(vex::brakeType::brake);
-    customleft (480);
-    brake ();
-    driveforward();
-    Propeller.spin(vex::directionType::fwd,750,vex::velocityUnits::rpm);
-    vex::task::sleep(2200);
-    brake();
-    Propeller.stop(vex::brakeType::brake);
-    vex::task::sleep(500); 
-    */
+    
     //AUTONOMOUS Red Left Flag
-    /**
-    drivebackwards();
-    vex::task::sleep(2000);
-     brake();
-    driveforward();
-    vex::task::sleep(1000);
+    
+    bdrive(1380);
     brake();
-    customleft(490);
+    fdrive(690);
     brake();
-    driveforward();
-    Propeller.spin(vex::directionType::rev,240,vex::velocityUnits::rpm);
-    vex::task::sleep(1325);
+    lturn();
+    fdriveflip(914);
     brake();
-    Propeller.stop(vex::brakeType::brake);
-    customright(480);
+    rturn();
+    fdriveplat(1517);
     brake();
-    driveforward();
-    Propeller.spin(vex::directionType::fwd,240,vex::velocityUnits::rpm);
-    vex::task::sleep(2200);
-    brake();
-    Propeller.stop(vex::brakeType::brake);
-    vex::task::sleep(500); 
-    */
+
     //AUTONOMOUS Blue Left Simple
-    /**
-    drivebackwards();
-    vex::task::sleep(850);
+   
+    bdrive(586);
     brake();
-    turnleft();
+    lturn();
+    fdriveflip(1206);
     brake();
-    driveforward();
-    Propeller.spin(vex::directionType::rev,360,vex::velocityUnits::rpm);
-    vex::task::sleep(1700);
+    bdrive(259);
     brake();
-    Propeller.stop(vex::brakeType::brake);
-    vex::task::sleep(500);
-    drivebackwards();
-    vex::task::sleep(375);
-    brake ();
-    customright(480);
+    rturn();
+    fdriveplat(1034);
     brake();
-    driveforward();
-    Propeller.spin(vex::directionType::fwd,360,vex::velocityUnits::rpm);
-    vex::task::sleep(2000);
-    brake();
-    Propeller.stop(vex::brakeType::brake);
-    */
+
     //AUTONOMOUS Red Right Simple
-    /**
-    drivebackwards();
-    vex::task::sleep(850);
+    
+    bdrive(586);
     brake();
-    turnright();
+    rturn();
+    fdriveflip (1241);
     brake();
-    driveforward();
-    Propeller.spin(vex::directionType::rev,360,vex::velocityUnits::rpm);
-    vex::task::sleep(1700);
+    bdrive(258);
     brake();
-    Propeller.stop(vex::brakeType::brake);
-    vex::task::sleep(500);
-    drivebackwards();
-    vex::task::sleep(375);
-    brake ();
-    customleft(480);
+    lturn();
+    fdriveplat(1034);
     brake();
-    driveforward();
-    Propeller.spin(vex::directionType::fwd,360,vex::velocityUnits::rpm);
-    vex::task::sleep(2000);
-    brake();
-    Propeller.stop(vex::brakeType::brake);
-    */
+    
 }
 void usercontrol( void ) 
 {
@@ -211,7 +248,13 @@ void usercontrol( void )
         RightMotor2.spin(vex::directionType::fwd, (Controller1.Axis2.value())/2, vex::velocityUnits::pct);
 
         }
-       
+
+        //Brake
+         if (Controller1.ButtonDown.pressing())
+        {
+            setDriveHold();
+        }
+        
         //Propeller
         if (Controller1.ButtonR2.pressing())
         {
@@ -225,11 +268,28 @@ void usercontrol( void )
         {
             Propeller.stop(vex::brakeType::brake);
         }
-         //Catapult/
+        //Intake
+      
+        if (Controller1.ButtonL1.pressing())
+        {
+            Intake.spin(vex::directionType::fwd, -240, vex::velocityUnits::pct);
+        }
+        else if (Controller1.ButtonL2.pressing())
+        {
+        Intake.spin(vex::directionType::fwd, 240, vex::velocityUnits::pct);
+        }
+        else
+        {
+            Intake.stop(vex::brakeType::brake);
+        }
         
-        if (Controller1.ButtonA.pressing())
+         if (Controller1.ButtonA.pressing())
         {
         Catapult.spin(vex::directionType::fwd, -60, vex::velocityUnits::pct);
+        }
+        else if (Controller1.ButtonB.pressing())
+        {
+        Catapult.spin(vex::directionType::fwd, 60, vex::velocityUnits::pct);
         }
         else
         { 

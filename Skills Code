@@ -53,7 +53,7 @@ void fdriveflip (int num)
     LeftMotor.startRotateTo(num,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
     RightMotor2.startRotateTo(num,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
     LeftMotor2.startRotateTo(num,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
-    Propeller.rotateTo(-num,vex::rotationUnits::deg,180,vex::velocityUnits::rpm);
+    Propeller.rotateTo(-(num*1.5),vex::rotationUnits::deg,180,vex::velocityUnits::rpm);
 }
 
 void fdriveplat (int num)
@@ -67,7 +67,7 @@ void fdriveplat (int num)
     LeftMotor.startRotateTo(num,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
     RightMotor2.startRotateTo(num,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
     LeftMotor2.startRotateTo(num,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
-    Propeller.rotateTo(num,vex::rotationUnits::deg,240,vex::velocityUnits::rpm);
+    Propeller.rotateTo((num*2),vex::rotationUnits::deg,240,vex::velocityUnits::rpm);
 }
 
 void drivebackwards ()

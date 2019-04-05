@@ -1,0 +1,248 @@
+//VOIDS
+void brake ()
+{
+    LeftMotor.stop(vex::brakeType::brake);
+    LeftMotor2.stop(vex::brakeType::brake);
+    RightMotor.stop(vex::brakeType::brake);
+    RightMotor2.stop(vex::brakeType::brake);
+    Propeller.stop(vex::brakeType::brake);
+    Thing.stop(vex::brakeType::brake);
+    Puncher1.stop(vex::brakeType::brake);
+    Puncher2.stop(vex::brakeType::brake);
+    vex::task::sleep(550);
+
+}
+
+void fdrive (int num)
+{
+    LeftMotor.resetRotation();
+    LeftMotor2.resetRotation();
+    RightMotor.resetRotation();
+    RightMotor2.resetRotation();
+    RightMotor.startRotateTo(num,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    LeftMotor.startRotateTo(num,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    RightMotor2.startRotateTo(num,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    LeftMotor2.rotateTo(num,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+}
+
+void fdriveX (int num)
+{
+    LeftMotor.resetRotation();
+    LeftMotor2.resetRotation();
+    RightMotor.resetRotation();
+    RightMotor2.resetRotation();
+    RightMotor.startRotateTo(num,vex::rotationUnits::deg,180,vex::velocityUnits::rpm);
+    LeftMotor.startRotateTo(num,vex::rotationUnits::deg,180,vex::velocityUnits::rpm);
+    RightMotor2.startRotateTo(num,vex::rotationUnits::deg,180,vex::velocityUnits::rpm);
+    LeftMotor2.rotateTo(num,vex::rotationUnits::deg,180,vex::velocityUnits::rpm);
+}
+
+void fdriveflip (int num)
+{
+    LeftMotor.resetRotation();
+    LeftMotor2.resetRotation();
+    RightMotor.resetRotation();
+    RightMotor2.resetRotation();
+    Propeller.resetRotation();
+    RightMotor.startRotateTo(num,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    LeftMotor.startRotateTo(num,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    RightMotor2.startRotateTo(num,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    LeftMotor2.startRotateTo(num,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    Propeller.rotateTo((num*1.5),vex::rotationUnits::deg,180,vex::velocityUnits::rpm);
+}
+
+void fdriveplat (int num)
+{
+    LeftMotor.resetRotation();
+    LeftMotor2.resetRotation();
+    RightMotor.resetRotation();
+    RightMotor2.resetRotation();
+    Propeller.resetRotation();
+    RightMotor.startRotateTo(num,vex::rotationUnits::deg,180,vex::velocityUnits::rpm);
+    LeftMotor.startRotateTo(num,vex::rotationUnits::deg,180,vex::velocityUnits::rpm);
+    RightMotor2.startRotateTo(num,vex::rotationUnits::deg,180,vex::velocityUnits::rpm);
+    LeftMotor2.startRotateTo(num,vex::rotationUnits::deg,180,vex::velocityUnits::rpm);
+    Propeller.rotateTo(-(num*1.3333333),vex::rotationUnits::deg,240,vex::velocityUnits::rpm);
+}
+
+void fdriveintake (int num)
+{
+    LeftMotor.resetRotation();
+    LeftMotor2.resetRotation();
+    RightMotor.resetRotation();
+    RightMotor2.resetRotation();
+    Propeller.resetRotation();
+    RightMotor.startRotateTo(num,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    LeftMotor.startRotateTo(num,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    RightMotor2.startRotateTo(num,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    LeftMotor2.startRotateTo(num,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    Propeller.rotateTo((num*1.5),vex::rotationUnits::deg,180,vex::velocityUnits::rpm);
+}
+
+void bdriveintake (int num)
+{
+    LeftMotor.resetRotation();
+    LeftMotor2.resetRotation();
+    RightMotor.resetRotation();
+    RightMotor2.resetRotation();
+    Propeller.resetRotation();
+    RightMotor.startRotateTo(-num,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    LeftMotor.startRotateTo(-num,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    RightMotor2.startRotateTo(-num,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    LeftMotor2.startRotateTo(-num,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    Propeller.rotateTo((num*1.5),vex::rotationUnits::deg,180,vex::velocityUnits::rpm);
+}
+
+void intake (int num)
+{
+    LeftMotor.resetRotation();
+    LeftMotor2.resetRotation();
+    RightMotor.resetRotation();
+    RightMotor2.resetRotation();
+    Propeller.resetRotation();
+    Propeller.rotateTo((num*1.5),vex::rotationUnits::deg,180,vex::velocityUnits::rpm);
+}
+
+void flip (int num)
+{
+    Propeller.resetRotation();
+    Propeller.rotateTo(-num,vex::rotationUnits::deg,240,vex::velocityUnits::rpm);
+}
+
+
+void bdrive (int num)
+{               
+    LeftMotor.resetRotation();
+    LeftMotor2.resetRotation();
+    RightMotor.resetRotation();
+    RightMotor2.resetRotation();
+    RightMotor.startRotateTo((num*-1),vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    LeftMotor.startRotateTo((num*-1),vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    RightMotor2.startRotateTo((num*-1),vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    LeftMotor2.rotateTo((num*-1),vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+}
+
+void bdriveX (int num)
+{               
+    LeftMotor.resetRotation();
+    LeftMotor2.resetRotation();
+    RightMotor.resetRotation();
+    RightMotor2.resetRotation();
+    RightMotor.startRotateTo((num*-1),vex::rotationUnits::deg,180,vex::velocityUnits::rpm);
+    LeftMotor.startRotateTo((num*-1),vex::rotationUnits::deg,180,vex::velocityUnits::rpm);
+    RightMotor2.startRotateTo((num*-1),vex::rotationUnits::deg,180,vex::velocityUnits::rpm);
+    LeftMotor2.rotateTo((num*-1),vex::rotationUnits::deg,180,vex::velocityUnits::rpm);
+}
+
+void rturn ()
+{
+    LeftMotor.resetRotation();
+    LeftMotor2.resetRotation();
+    RightMotor.resetRotation();
+    RightMotor2.resetRotation();
+    LeftMotor.startRotateTo(305,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    LeftMotor2.startRotateTo(305,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    RightMotor.startRotateTo(-305,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    RightMotor2.rotateTo(-305,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    brake();
+}
+
+void lturn ()
+{
+    LeftMotor.resetRotation();
+    LeftMotor2.resetRotation();
+    RightMotor.resetRotation();
+    RightMotor2.resetRotation();
+    RightMotor.startRotateTo(300,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    RightMotor2.startRotateTo(300,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    LeftMotor.startRotateTo(-300,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    LeftMotor2.rotateTo(-300,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    brake();
+}
+
+void lturnNum (int num)
+{
+    LeftMotor.resetRotation();
+    LeftMotor2.resetRotation();
+    RightMotor.resetRotation();
+    RightMotor2.resetRotation();
+    RightMotor.startRotateTo(num,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    RightMotor2.startRotateTo(num,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    LeftMotor.startRotateTo(-num,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    LeftMotor2.rotateTo(-num,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    brake();
+}
+
+void rturnNum (int num)
+{
+    LeftMotor.resetRotation();
+    LeftMotor2.resetRotation();
+    RightMotor.resetRotation();
+    RightMotor2.resetRotation();
+    RightMotor.startRotateTo(-num,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    RightMotor2.startRotateTo(-num,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    LeftMotor.startRotateTo(num,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    LeftMotor2.rotateTo(num,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+    brake();
+}
+
+
+void setDriveHold()
+{
+    RightMotor.setStopping(vex::brakeType::hold);
+    RightMotor2.setStopping(vex::brakeType::hold);
+    LeftMotor.setStopping(vex::brakeType::hold);
+    LeftMotor2.setStopping(vex::brakeType::hold);
+}
+
+void fire()
+{
+    Puncher1.spin(vex::directionType::rev, 120, vex::velocityUnits::pct);
+    Puncher2.spin(vex::directionType::rev, 120, vex::velocityUnits::pct);
+    vex::task::sleep(800);
+}
+
+void fire(int num)
+{
+    Puncher1.spin(vex::directionType::rev, 120, vex::velocityUnits::pct);
+    Puncher2.spin(vex::directionType::rev, 120, vex::velocityUnits::pct);
+    vex::task::sleep(num);
+    brake();
+}
+
+void lower()
+{
+    Thing.resetRotation();
+    Thing.rotateTo(2100,vex::rotationUnits::deg,480,vex::velocityUnits::rpm);
+}
+
+void halflower()
+{
+    Thing.resetRotation();
+    Thing.rotateTo(1050,vex::rotationUnits::deg,240,vex::velocityUnits::rpm);
+}
+
+void raiseCap()
+{
+    Thing.resetRotation();
+    Thing.rotateTo(-2300,vex::rotationUnits::deg,120,vex::velocityUnits::rpm);
+}
+
+
+//AUTON CODE
+
+bdriveX(400);
+    brake();
+    bdrive(625);
+    brake();
+    raiseCap();
+    brake();
+    lturnNum (170);
+    halflower();
+    brake();
+    fdrive(200);
+    brake();
+    bdrive(400);
+    brake();
+    fire();
+    brake();
